@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BDBOAuth1Manager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,6 +42,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        // Step 3: Get the access token
+        TwitterClient.sharedInstance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: { (accessToken:BDBOAuth1Credential!) -> Void in
+            print("Got access token: \(accessToken)")
+            
+            // initial endpoint hit
+            TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                // print("user: \(response)")
+                let user = User(dictionary: response as! NSDictionary)
+                print("user: \(user.name!)")
+                }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                    print("There was an error getting the user: \(error.description)")
+            })
+            
+            // getting timeline data
+            TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                //print("home timeline: \(response)")
+                }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                    print("There was an error getting the home timeline: \(error.description)")
+            })
+            
+            }) { (error: NSError!) -> Void in
+                print("There was an error getting the access token: \(error.description)")
+        }
+        return true
+    }
 
 }
 
