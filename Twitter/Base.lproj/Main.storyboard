@@ -24,10 +24,71 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="GO6-NX-agb" kind="modal" identifier="loginSegue" id="2Wo-X4-RQ2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="101" y="321"/>
+            <point key="canvasLocation" x="83" y="332"/>
+        </scene>
+        <!--Me-->
+        <scene sceneID="x2T-d9-ude">
+            <objects>
+                <viewController id="UBv-Nf-DmQ" customClass="ProfileViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dd5-oI-sd1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kld-9e-oTD">
+                                <rect key="frame" x="73" y="403" width="175" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="onLogout:" destination="UBv-Nf-DmQ" eventType="touchUpInside" id="dkH-Bj-2mx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Me" id="pJG-AK-vN6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="57H-Xk-I82" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057" y="683"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="CsH-FJ-leD">
+            <objects>
+                <viewController storyboardIdentifier="TweetsViewController" id="cwV-aT-PwI" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OaA-mr-bxc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Home" id="Twd-tG-4kO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gmI-Ct-AED" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057" y="-42"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Owi-iC-8qP">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBarController" id="GO6-NX-agb" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Ts2-92-umZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="cwV-aT-PwI" kind="relationship" relationship="viewControllers" id="uWy-I6-Lze"/>
+                        <segue destination="UBv-Nf-DmQ" kind="relationship" relationship="viewControllers" id="eOi-yi-i1H"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LcD-tP-VfB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="534" y="332"/>
         </scene>
     </scenes>
 </document>
