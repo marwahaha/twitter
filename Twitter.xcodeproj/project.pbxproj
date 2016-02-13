@@ -17,6 +17,7 @@
 		F598C9421C6B159900F7071C /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F598C9411C6B159900F7071C /* Tweet.swift */; };
 		F598C9441C6BF17200F7071C /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F598C9431C6BF17100F7071C /* TweetsViewController.swift */; };
 		F598C9461C6C0D8300F7071C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F598C9451C6C0D8300F7071C /* ProfileViewController.swift */; };
+		F598C9491C6C238000F7071C /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F598C9481C6C238000F7071C /* TweetTableViewCell.swift */; };
 		FB707B2C1B3FC581318513C5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3CD74D3818822530278A6C /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		F598C9411C6B159900F7071C /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		F598C9431C6BF17100F7071C /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		F598C9451C6C0D8300F7071C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F598C9481C6C238000F7071C /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		F57363D51C698A9700A3637C /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				F598C9471C6C234800F7071C /* Views */,
 				F598C93E1C6B154700F7071C /* Models */,
 				F57363F21C6AA9FD00A3637C /* API */,
 				F57363D61C698A9700A3637C /* AppDelegate.swift */,
@@ -117,6 +120,14 @@
 				F598C9411C6B159900F7071C /* Tweet.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		F598C9471C6C234800F7071C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F598C9481C6C238000F7071C /* TweetTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +259,7 @@
 				F598C9461C6C0D8300F7071C /* ProfileViewController.swift in Sources */,
 				F57363F41C6AAA1E00A3637C /* TwitterClient.swift in Sources */,
 				F57363D71C698A9700A3637C /* AppDelegate.swift in Sources */,
+				F598C9491C6C238000F7071C /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

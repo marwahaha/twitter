@@ -28,7 +28,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     func homeTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         // getting timeline data
         GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            //print("home timeline: \(response)")
             let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
@@ -79,5 +78,28 @@ class TwitterClient: BDBOAuth1SessionManager {
                 print("There was an error getting the access token: \(error.description)")
         }
 
+    }
+    
+    func retweet(id: String, completion: (retweetCount: String) -> ()) {
+        TwitterClient.sharedInstance.POST("https://api.twitter.com/1.1/statuses/retweet/\(id).json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let retweetCountNumber = (response as! NSDictionary)["retweet_count"] as! NSNumber
+            let retweetCount = "\(retweetCountNumber)"
+                print("retweeted tweet with id \(id), \(retweetCount) is the new retweet count.")
+                completion(retweetCount: retweetCount)
+            }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("failed to retweet tweet with id \(id)")
+        }
+    }
+    
+    func like(id: String, completion: (likeCount: String) -> ()) {
+        TwitterClient.sharedInstance.POST("https://api.twitter.com/1.1/favorites/create.json?id=\(id)", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print(response)
+            let likeCountNumber = (response as! NSDictionary)["favorite_count"] as! NSNumber
+            let likeCount = "\(likeCountNumber)"
+            print("liked tweet with id \(id), \(likeCount) is the new like count.")
+            completion(likeCount: likeCount)
+            }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("failed to like tweet with id \(id)")
+        }
     }
 }
