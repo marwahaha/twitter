@@ -18,14 +18,16 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var retweetLabel: UILabel!
     @IBOutlet var likeLabel: UILabel!
+    @IBOutlet var retweetButton: UIButton!
+    @IBOutlet var likeButton: UIButton!
+    
     
     var tweet : Tweet? {
         didSet {
-            print("this is happening \(tweet)")
             nameLabel.text = tweet?.user?.name!
-            screenNameLabel.text = "@" + (tweet?.user?.screenName!)!
+            screenNameLabel.text = "@" + (tweet?.user?.screenName)!
             contentLabel.text = tweet?.text
-            createdAtLabel.text = tweet?.createdAtString
+            createdAtLabel.text = tweet?.timeSinceCreatedString
             
             // set image of user's profile picture
             let imagePath = NSURL(string: (tweet?.user?.profileImageUrl)!)
@@ -33,24 +35,15 @@ class TweetTableViewCell: UITableViewCell {
             
             retweetLabel.text = tweet?.retweetCountString!
             likeLabel.text = tweet?.likeCountString!
+            
+            retweetLabel.textColor = tweet?.retweetLabelColor
+            likeLabel.textColor = tweet?.likeLabelColor
+            
+            // configure selection states
+            retweetButton.selected = (tweet?.retweeted)!
+            likeButton.selected = (tweet?.liked)!
+            
         }
-    }
-    
-    // retweet, reply, like functionality
-    @IBAction func replyPressed(sender: AnyObject) {
-
-    }
-    
-    @IBAction func retweetPressed(sender: AnyObject) {
-        TwitterClient.sharedInstance.retweet((tweet?.id)!, completion: {(retweetCount: String) -> Void in
-            self.retweetLabel.text = retweetCount
-        })
-    }
-    
-    @IBAction func likePressed(sender: AnyObject) {
-        TwitterClient.sharedInstance.like((tweet?.id)!, completion: {(likeCount: String) -> Void in
-            self.likeLabel.text = likeCount
-        })
     }
     
     // consider moving this to a different file...views should be the dumbest

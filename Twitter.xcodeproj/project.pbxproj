@@ -18,6 +18,8 @@
 		F598C9441C6BF17200F7071C /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F598C9431C6BF17100F7071C /* TweetsViewController.swift */; };
 		F598C9461C6C0D8300F7071C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F598C9451C6C0D8300F7071C /* ProfileViewController.swift */; };
 		F598C9491C6C238000F7071C /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F598C9481C6C238000F7071C /* TweetTableViewCell.swift */; };
+		F5C79E251C6F9FF600BA3D08 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C79E241C6F9FF500BA3D08 /* InfiniteScrollActivityView.swift */; };
+		F5C79E271C7042AD00BA3D08 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C79E261C7042AC00BA3D08 /* ComposeViewController.swift */; };
 		FB707B2C1B3FC581318513C5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3CD74D3818822530278A6C /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,8 @@
 		F598C9431C6BF17100F7071C /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		F598C9451C6C0D8300F7071C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F598C9481C6C238000F7071C /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		F5C79E241C6F9FF500BA3D08 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
+		F5C79E261C7042AC00BA3D08 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 				F57363D61C698A9700A3637C /* AppDelegate.swift */,
 				F57363D81C698A9700A3637C /* ViewController.swift */,
 				F57363DA1C698A9900A3637C /* Main.storyboard */,
+				F5C79E261C7042AC00BA3D08 /* ComposeViewController.swift */,
 				F598C9431C6BF17100F7071C /* TweetsViewController.swift */,
 				F598C9451C6C0D8300F7071C /* ProfileViewController.swift */,
 				F57363DD1C698A9A00A3637C /* Assets.xcassets */,
@@ -125,6 +130,7 @@
 		F598C9471C6C234800F7071C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F5C79E241C6F9FF500BA3D08 /* InfiniteScrollActivityView.swift */,
 				F598C9481C6C238000F7071C /* TweetTableViewCell.swift */,
 			);
 			name = Views;
@@ -252,10 +258,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C79E251C6F9FF600BA3D08 /* InfiniteScrollActivityView.swift in Sources */,
 				F598C9401C6B157E00F7071C /* User.swift in Sources */,
 				F598C9421C6B159900F7071C /* Tweet.swift in Sources */,
 				F598C9441C6BF17200F7071C /* TweetsViewController.swift in Sources */,
 				F57363D91C698A9700A3637C /* ViewController.swift in Sources */,
+				F5C79E271C7042AD00BA3D08 /* ComposeViewController.swift in Sources */,
 				F598C9461C6C0D8300F7071C /* ProfileViewController.swift in Sources */,
 				F57363F41C6AAA1E00A3637C /* TwitterClient.swift in Sources */,
 				F57363D71C698A9700A3637C /* AppDelegate.swift in Sources */,

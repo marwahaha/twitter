@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if User.currentUser != nil {
             // Go to the logged in screen
-            print("Current User detected")
             let vc = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as UIViewController
             window?.rootViewController = vc
             
