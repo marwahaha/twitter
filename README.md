@@ -44,11 +44,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
-I accidentally spent 3 hours trying to implement un-retweeting using the guide provided, when I realized I could just use unretweeting. It was difficult to determine how to arrange the RT/Like functions according to MVC conventions. OAuth is complicated, but it was easy to go through the videos. I hope to have it super polished for next week! 
+I accidentally spent 3 hours trying to implement un-retweeting using the guide provided, when I realized I could just use the statuses/unretweet endpoint. It was difficult to determine how to arrange the RT/Like functions according to MVC conventions. OAuth is complicated, but it was easy to go through the videos. I hope to have it super polished for next week! 
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2016 Kyle Wilson
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
