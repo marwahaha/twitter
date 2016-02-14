@@ -116,12 +116,16 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func tweet(status: String, params: NSDictionary?, completion: (id: String) -> ()) {
-        TwitterClient.sharedInstance.POST("https://api.twitter.com/1.1/statuses/update.json?status=\(status)", parameters: params, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            print("success")
-            completion(id: (response as! NSDictionary)["id_str"] as! String)
-            }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
-                print("failed to tweet with error code \(error.description)")
+        if let escapedStatus = status.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
+            let query = "status=\(escapedStatus)"
+            TwitterClient.sharedInstance.POST("https://api.twitter.com/1.1/statuses/update.json?\(query)", parameters: params, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                print("success")
+                completion(id: (response as! NSDictionary)["id_str"] as! String)
+                }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                    print("failed to tweet with error code \(error.description)")
+            }
         }
+
     }
 
 }
