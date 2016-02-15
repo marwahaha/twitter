@@ -2,7 +2,7 @@
 
 **Twitter** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: 15 hours spent in total
+Time spent: 18 hours spent in total
 
 ## User Stories
 
@@ -26,6 +26,7 @@ The following **additional** features are implemented:
 - [x] Timestamp is formatted in time since posted
 - [x] Retweets and favorites are formatted to be abreviated for >=1000 amounts
 - [x] Compose a tweet
+- [x] Implement profile view (autolayout still needs to be completed)
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
