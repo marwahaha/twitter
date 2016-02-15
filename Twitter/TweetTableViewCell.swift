@@ -31,7 +31,7 @@ class TweetTableViewCell: UITableViewCell {
             
             // set image of user's profile picture
             let imagePath = NSURL(string: (tweet?.user?.profileImageUrl)!)
-            safeSetImageWithURL(profileImageView, imagePath: imagePath)
+            TwitterClient.sharedInstance.safeSetImageWithURL(profileImageView, imagePath: imagePath)
             
             retweetLabel.text = tweet?.retweetCountString!
             likeLabel.text = tweet?.likeCountString!
@@ -47,26 +47,7 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     // consider moving this to a different file...views should be the dumbest
-    func safeSetImageWithURL(imageView: UIImageView, imagePath: NSURL?) {
-        if imagePath != nil {
-            imageView.setImageWithURLRequest(NSURLRequest(URL: imagePath!), placeholderImage: nil, success: { (imageRequest, imageResponse, image) -> Void in
-                if imageResponse != nil {
-                    imageView.alpha = 0
-                    imageView.image = image
-                    UIView.animateWithDuration(0.25, animations: { () -> Void in
-                        imageView.alpha = 1
-                    })
-                }
-                else {
-                    imageView.image = image
-                }
-                }, failure: { (imageRequest, imageResponse, imageError) -> Void in
-            })
-        }
-        else {
-            // set placeholder
-        }
-    }
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

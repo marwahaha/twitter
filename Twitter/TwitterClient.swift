@@ -115,6 +115,16 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
+    func user(id: String, params: NSDictionary?, completion: (user: User) -> ()) {
+        TwitterClient.sharedInstance.GET("https://api.twitter.com/1.1/users/show.json?user_id=\(id)", parameters: params, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let dict = response as! NSDictionary
+            let user = User(dictionary: dict)
+            completion(user: user)
+            }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("failed to get user data from user_id \(id)")
+        }
+    }
+    
     func tweet(status: String, params: NSDictionary?, completion: (id: String) -> ()) {
         let customCharacterSet = NSCharacterSet(charactersInString: "\"#%<>[\\]^`{|}, ?").invertedSet
         if let escapedStatus = status.stringByAddingPercentEncodingWithAllowedCharacters(customCharacterSet) {
@@ -127,7 +137,28 @@ class TwitterClient: BDBOAuth1SessionManager {
                     print("failed to tweet with error code \(error.description)")
             }
         }
-
+    }
+    
+    // moved this function here from the view because views should be dumb according to MVC
+    func safeSetImageWithURL(imageView: UIImageView, imagePath: NSURL?) {
+        if imagePath != nil {
+            imageView.setImageWithURLRequest(NSURLRequest(URL: imagePath!), placeholderImage: nil, success: { (imageRequest, imageResponse, image) -> Void in
+                if imageResponse != nil {
+                    imageView.alpha = 0
+                    imageView.image = image
+                    UIView.animateWithDuration(0.25, animations: { () -> Void in
+                        imageView.alpha = 1
+                    })
+                }
+                else {
+                    imageView.image = image
+                }
+                }, failure: { (imageRequest, imageResponse, imageError) -> Void in
+            })
+        }
+        else {
+            // set placeholder
+        }
     }
 
 }

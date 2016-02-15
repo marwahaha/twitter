@@ -27,6 +27,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNeedsStatusBarAppearanceUpdate()
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -55,6 +56,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.Default
     }
 
     override func didReceiveMemoryWarning() {
