@@ -16,6 +16,7 @@ class Tweet: NSObject {
     
     var user: User?
     var text: String?
+    var createdAtDetailString: String? // 2/17/16, 2:15 PM
     var createdAtString: String?
     var createdAt: NSDate?
     var retweetCount: NSNumber?
@@ -30,6 +31,7 @@ class Tweet: NSObject {
     var likeLabelColor: UIColor!
     var retweetedStatus: NSDictionary?
     var currentUserRetweet: NSDictionary?
+    
     
     init(dictionary: NSDictionary) {
         super.init()
@@ -60,9 +62,11 @@ class Tweet: NSObject {
         let formatter = NSDateFormatter() // expensive; usually want a static formatter
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
-        formatter.dateFormat = "MMM d"
         timeSinceCreatedString = convertTimeToString(Int(NSDate().timeIntervalSinceDate(createdAt!)))
+        formatter.dateFormat = "MMM d"
         createdAtString = formatter.stringFromDate(createdAt!)
+        formatter.dateFormat = "M/D/yy, H:mm a"
+        createdAtDetailString = formatter.stringFromDate(createdAt!).uppercaseString
     }
     
     // format an array of tweets from the response dictionary
