@@ -21,7 +21,6 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet var retweetButton: UIButton!
     @IBOutlet var likeButton: UIButton!
     
-    
     var tweet : Tweet? {
         didSet {
             nameLabel.text = tweet?.user?.name!

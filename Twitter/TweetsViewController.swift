@@ -74,7 +74,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetTableViewCell
         cell.tweet = tweets![indexPath.row]
-        // add event handling for retweet/like events
+        // add event handling for profile select, retweet, and like events
+        let singleTap = UITapGestureRecognizer(target: self, action: "segueToProfile:")
+        singleTap.numberOfTapsRequired = 1
+        cell.profileImageView.tag = indexPath.row
+        cell.profileImageView.userInteractionEnabled = true
+        cell.profileImageView.addGestureRecognizer(singleTap)
         cell.retweetButton.tag = indexPath.row
         cell.retweetButton.addTarget(self, action: "retweetPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         cell.likeButton.tag = indexPath.row
@@ -122,6 +127,19 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             self.isMoreDataLoading = false
         });
 
+    }
+    
+    
+    // handle profile image tapped
+    func segueToProfile(sender: UITapGestureRecognizer!) {
+        print("here")
+        print("no crash, sender's tag is \(sender.view!.tag)")
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: sender.view!.tag, inSection: 0)) as! TweetTableViewCell
+        let user = cell.tweet?.user
+        let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        profileViewController.user = user
+        self.navigationController!.pushViewController(profileViewController, animated:true)
+        
     }
     
     // handle retweet pressed

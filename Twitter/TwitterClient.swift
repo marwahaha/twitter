@@ -37,6 +37,18 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     }
     
+    func userTimelineWithParams(id: String, params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        // getting timeline data
+        GET("1.1/statuses/user_timeline.json?user_id=\(id)", parameters: params, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("There was an error getting the home timeline: \(error.description)")
+                completion(tweets: nil, error: error)
+        })
+        
+    }
+    
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()) {
         loginCompletion = completion
         

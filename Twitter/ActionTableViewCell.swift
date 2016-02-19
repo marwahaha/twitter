@@ -10,9 +10,14 @@ import UIKit
 
 class ActionTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    
     var tweet: Tweet? {
         didSet {
-            
+            // configure selection states
+            retweetButton.selected = (tweet?.retweeted)!
+            likeButton.selected = (tweet?.liked)!
         }
     }
 
