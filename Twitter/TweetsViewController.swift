@@ -21,6 +21,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     var tweetAccumulator = 20
     
+    var isReply = false
+    
     var loadingMoreView: InfiniteScrollActivityView?
     
     @IBOutlet var tableView: UITableView!
@@ -80,6 +82,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         cell.profileImageView.tag = indexPath.row
         cell.profileImageView.userInteractionEnabled = true
         cell.profileImageView.addGestureRecognizer(singleTap)
+        cell.replyButton.tag = indexPath.row
+        cell.replyButton.addTarget(self, action: "replyPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         cell.retweetButton.tag = indexPath.row
         cell.retweetButton.addTarget(self, action: "retweetPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         cell.likeButton.tag = indexPath.row
@@ -132,13 +136,19 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     // handle profile image tapped
     func segueToProfile(sender: UITapGestureRecognizer!) {
-        print("here")
-        print("no crash, sender's tag is \(sender.view!.tag)")
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: sender.view!.tag, inSection: 0)) as! TweetTableViewCell
         let user = cell.tweet?.user
         let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
         profileViewController.user = user
         self.navigationController!.pushViewController(profileViewController, animated:true)
+        
+    }
+    
+    // handle reply pressed 
+    // set tweet in reply to, then perform segue to compose view controller with the tag in the box
+    func replyPressed(sender: UIButton!) {
+        isReply = true
+        performSegueWithIdentifier("ComposeSegue", sender: sender)
         
     }
     
@@ -215,7 +225,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             let tweet = tweets![(tableView.indexPathForCell(sender as! UITableViewCell)?.row)!]
             vc.tweet = tweet
         }
-        
+        if segue.identifier == "ComposeSegue" && isReply {
+            let replyButton = sender as! UIButton
+            let nc = segue.destinationViewController as! UINavigationController
+            let vc = nc.topViewController as! ComposeViewController
+            let tweet = tweets![replyButton.tag]
+            vc.isReply = true
+            vc.inReplyToTweetWithId = tweet.id
+            vc.startingText = "@" + (tweet.user?.screenName)! + " "
+            isReply = false
+        }
     }
     
 

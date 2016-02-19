@@ -80,7 +80,8 @@ class Tweet: NSObject {
     
     // change stats >= 1000 to have K abbreviation
     class func format(stat: NSNumber) -> String{
-        return stat.doubleValue >= 1000 ? String(format: "%.1fK", arguments: [stat.doubleValue/1000]) : "\(stat.integerValue)"
+        return stat.doubleValue >= 1000000 ? String(format: "%.1fM", arguments: [stat.doubleValue/1000000]) :
+            stat.doubleValue >= 1000 ? String(format: "%.1fK", arguments: [stat.doubleValue/1000]) : "\(stat.integerValue)"
     }
     
     // make timestamp friendlier

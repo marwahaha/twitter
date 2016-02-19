@@ -25,6 +25,8 @@ class User: NSObject {
     var followerCountString: String?
     var followingCount: NSNumber?
     var followingCountString: String?
+    var tweetCount: NSNumber?
+    var tweetCountString: String?
     // ....etc....
     
     init(dictionary: NSDictionary) {
@@ -33,13 +35,14 @@ class User: NSObject {
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
         profileImageUrl = dictionary["profile_image_url"] as? String
-        print(profileImageUrl)
         profileBannerUrl = dictionary["profile_banner_url"] as? String
         tagline = dictionary["description"] as? String
         followerCount = dictionary["followers_count"] as? NSNumber
         followerCountString = Tweet.format(followerCount!)
         followingCount = dictionary["friends_count"] as? NSNumber
         followingCountString = Tweet.format(followingCount!)
+        tweetCount = dictionary["statuses_count"] as? NSNumber
+        tweetCountString = Tweet.format(tweetCount!)
     }
     
     func logout() {

@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var isMoreDataLoading = false
     
+    var isCurrentUser = false
+    
     var tweetAccumulator = 20
     
     var loadingMoreView: InfiniteScrollActivityView?
@@ -33,6 +35,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if user == nil {
             user = User.currentUser
+            isCurrentUser = true
         }
         
         super.viewDidLoad()
@@ -70,7 +73,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.Default
+        return isCurrentUser ? UIStatusBarStyle.LightContent : UIStatusBarStyle.Default
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,6 +96,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.profileImageView.tag = indexPath.row
         cell.profileImageView.userInteractionEnabled = true
         cell.profileImageView.addGestureRecognizer(singleTap)
+        cell.replyButton.tag = indexPath.row
         cell.retweetButton.tag = indexPath.row
         cell.retweetButton.addTarget(self, action: "retweetPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         cell.likeButton.tag = indexPath.row
@@ -228,18 +232,22 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let tweet = tweets![(tableView.indexPathForCell(sender as! UITableViewCell)?.row)!]
             vc.tweet = tweet
         }
+        if segue.identifier == "ComposeFromProfile" {
+            let replyButton = sender as! UIButton
+            let nc = segue.destinationViewController as! UINavigationController
+            let vc = nc.topViewController as! ComposeViewController
+            let tweet = tweets![replyButton.tag]
+            vc.isReply = true
+            vc.inReplyToTweetWithId = tweet.id
+            vc.startingText = "@" + (tweet.user?.screenName)! + " "
+        }
         
     }
     
     // control logout capability based on user
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        if user?.id != User.currentUser?.id {
-            logoutButton.alpha = 0
-        }
-        else {
-            logoutButton.alpha = 1
-        }
+        logoutButton.alpha = isCurrentUser ? 1 : 0
     }
 
     @IBAction func onLogout(sender: AnyObject) {

@@ -20,6 +20,7 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet var likeLabel: UILabel!
     @IBOutlet var retweetButton: UIButton!
     @IBOutlet var likeButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
     
     var tweet : Tweet? {
         didSet {
