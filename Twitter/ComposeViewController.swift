@@ -20,7 +20,12 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
         
         self.automaticallyAdjustsScrollViewInsets = false
-        composeTextView.text = isReply! ? startingText : ""
+        if isReply != nil {
+            composeTextView.text = isReply! ? startingText : ""
+        }
+        else {
+            composeTextView.text = ""
+        }
         composeTextView.becomeFirstResponder()
 
         // Do any additional setup after loading the view.
@@ -37,10 +42,12 @@ class ComposeViewController: UIViewController {
 
     @IBAction func onTweetPressed(sender: AnyObject) {
         let status = composeTextView.text
-        if isReply! {
+        if isReply != nil {
+            if isReply! {
             TwitterClient.sharedInstance.tweet(status, params: ["in_reply_to_status_id": inReplyToTweetWithId!], completion: { (id) -> () in
                 print("created tweet with id \(id)")
-            })
+                })
+            }
         }
         else {
             TwitterClient.sharedInstance.tweet(status, params: nil, completion: { (id) -> () in
